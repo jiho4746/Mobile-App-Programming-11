@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu1"
+        android:title="메뉴1"/>
+    <item
+        android:id="@+id/menu2"
+        android:title="메뉴2"
+        android:icon="@android:drawable/ic_menu_add"
+
+        />
+
+    <!--appcompat 라이브러리 : 검색-->
+    <item
+        android:id="@+id/menu_search"
+        android:title="아이템"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <!--
+    xmlns:app="http://schemas.android.com/apk/res-auto" 추가 작성해야
+    app:showAsAction, app:actionViewClass 실행 가능
+    -->
+
+</menu>

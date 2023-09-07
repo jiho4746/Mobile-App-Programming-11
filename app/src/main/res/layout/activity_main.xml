@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--액션바 설정은 res-vlaues-themes에서 가능~!!!-->
+
+<!--
+//androidx.appcompat :앱의 API 레벨 호황성 해결
+//androidx.recyclerview : 목록 화면 구성
+//androidx.viewpager2 : 스와이프로 넘기는 화면 구성
+//androidx.fragment : 액티비티처럼 동작하는 뷰
+//androidx.drawerlayout : 옆에서 서랍처럼 열리는 화면
+-->
+
+<!-- drawerlayout : 옆에서 열리는 화면 구성-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer"
+    tools:context=".MainActivity">
+
+<!--CoordinatorLayout : 뷰끼리 상호작용-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--android:orientation="vertical"-->
+
+        <!--Toolbar를 포함하는 AppBar-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/appbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="AppBar Title"
+                app:expandedTitleMarginBottom="50dp"
+                app:expandedTitleMarginStart="50dp">
+                <!--
+                app:contentScrim="?attr/colorPrimary" //색깔 설정
+                //(1) 스크롤 시 모두 사라지지 않고 툴바를 출력할 정도의 한 줄만 남을 때까지 출력
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                //(2) 스크롤 시 완전히 사라졌다가 거꾸로 스크롤 시 처음부터 나타나지 않고 메인 콘텐츠 부분이 끝까지 스크롤 된 다음에 나타남
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                //(3) 스크롤 시 완전히 사라졌다가 스크롤 시 처음부터 다시 나타남
+                app:layout_scrollFlags="scroll|enterAlways"
+               -->
+
+                <!--ToolBar 추가-->
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:id="@+id/toolbar"
+                    app:layout_collapseMode="pin"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
+                <!-- AppBar가 접힐 때
+                app:layout_collapseMode="pin" //고정되어 보여짐
+                -->
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    android:src="@drawable/stadium"/>
+                <!--
+                android:scaleType="centerCrop" //이미지를 AppBar에 맞춰 키움
+                AppBar가 접힐 때
+                app:layout_collapseMode="parallax" //같이 접힘
+                -->
+
+                <!--Tab과 ViewPager2와 연동-->
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/tab1"
+                    android:layout_gravity="bottom"
+                    app:tabMode="scrollable"
+                    app:layout_collapseMode="parallax"
+                    app:tabTextColor="#ff00ff">
+                </com.google.android.material.tabs.TabLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <!--<TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_contnet" //fragment를 사용할 수 있게 activity_main에 가져옴
+            android:orientation="vertical"/> -->
+
+        <!-- ViewPager2 사용-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/viewpager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        <!-- ViewPager2에 scrolling_view 속성 넣음
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+         -->
+
+        <!--플로팅 액션 버튼(위에 떠 있는 버튼) -> res-themes.xml에 추가 작성
+         parent="Theme.MaterialComponents.Light.NoActionBar"-->
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab"
+            android:layout_margin="10dp"
+            app:icon="@android:drawable/ic_input_add"
+            android:text="Extended Tab"
+            app:layout_anchor="@id/viewpager"
+            app:layout_anchorGravity="bottom|right"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:text="나는 drawer입니다"/>-->
+
+    <!--NavigationView - 드로우 화면-->
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/main_drawer_view"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu"/>
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
